@@ -1,0 +1,17 @@
+.square {
+    
+    height: 150vh;
+    width: 40vw;
+    background-color: #555;
+    border-radius: 300px;
+    overflow: hidden;
+}
+
+.body {
+    /* align-items: center; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}

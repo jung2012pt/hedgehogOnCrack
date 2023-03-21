@@ -1,11 +1,41 @@
 .square {
-    
+
     height: 150vh;
-    width: 40vw;
-    background-color: #555;
+    /* width: 40vw; */
+    /* background-color: #555; */
     border-radius: 300px;
     overflow: hidden;
 }
+
+.middleHidden {
+
+    /* overflow: hidden; */
+    /* overflow-x: hidden;
+    overflow-y: hidden; */
+
+}
+
+.heghtFig {
+
+    height: 20%;
+
+}
+
+.contrainer {
+
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+
 
 /* .body {
     

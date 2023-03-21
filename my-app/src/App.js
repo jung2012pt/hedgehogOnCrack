@@ -8,6 +8,7 @@ import {
 import Signin from './Sigin.js';
 import Profile from './Profile.js';
 import Category from './view/Category.js';
+import NewCatalog from './view/newCatalog.js';
 
 function App() {
   const token = localStorage.getItem('accessToken');
@@ -37,7 +38,7 @@ function App() {
     // </BrowserRouter>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Category />} />
+        <Route path="/" element={<NewCatalog />} />
         <Route path="/abc" element={<Signin />} />
 
       </Routes>

@@ -10,6 +10,7 @@ import Profile from './Profile.js';
 import Category from './view/Category.js';
 import NewCatalog from './view/newCatalog.js';
 
+
 function App() {
   const token = localStorage.getItem('accessToken');
   // if (!token) {

@@ -12,12 +12,10 @@ import NewCatalog from './view/newCatalog.js';
 
 function App() {
   const token = localStorage.getItem('accessToken');
-
   // if (!token) {
   //   return <Signin />
   // }
   return (
-
     // <BrowserRouter>
     //   <Routes>
     //     <Route path="/profile">

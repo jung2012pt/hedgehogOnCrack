@@ -9,17 +9,30 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
+// import { ThemeProvider, createTheme } from "@mui/material/styles";
+// const themeLight = createTheme({
+//   palette: {
+//     background: {
+//       default: "#e4f0e2"
+//     }
+//   }
+// });
 
 const useStyles = makeStyles((theme) => ({
+  
   root: {
+    background : '#ff00ff',
     height: '100vh',
+   
+    // width : '100vw',
   },
-  image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundSize: 'cover',
-  },
+  // image: {
+  //   backgroundImage: 'url(https://source.unsplash.com/random)',
+  //   backgroundSize: 'cover',
+  // },
   paper: {
     margin: theme.spacing(8, 4),
+    
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -77,8 +90,8 @@ export default function Signin() {
   return (
     <Grid container className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} md={7} className={classes.image} />
-      <Grid item xs={12} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={false} className={classes.image} />
+      <Grid item xs={12}  component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />

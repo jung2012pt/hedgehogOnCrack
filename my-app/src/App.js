@@ -38,6 +38,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<NewCatalog />} />
+        <Route path="/1" element={<Category />} />
         <Route path="/abc" element={<Signin />} />
 
       </Routes>

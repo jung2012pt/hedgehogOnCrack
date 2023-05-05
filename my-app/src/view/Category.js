@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import '../css/Category.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from '../image/104213a58.jpg'; // Tell webpack this JS file uses this image
+import { Row, Col } from 'react-bootstrap';
 import Avatar from '@material-ui/core/Avatar';
 // import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,14 +12,9 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
-import '../css/Category.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../image/104213a58.jpg'; // Tell webpack this JS file uses this image
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
-import { Row, Col } from 'react-bootstrap';
 const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
@@ -65,7 +65,7 @@ export default function Category() {
 
                         </div>
                         <div class="square">
-                            <img src={logo} class="center" alt="Logo" />
+                            <img src={logo} class="centerr" alt="Logo" />
 
                         </div>
 

@@ -21,28 +21,24 @@ import swal from 'sweetalert';
 const useStyles = makeStyles((theme) => ({
   
   root: {
-    background : '#ff00ff',
-    height: '100vh',
-   
-    // width : '100vw',
+    "& .MuiPaper-root": {
+      background: '#FEF9EE',
+      height: '100vh'
+    }
   },
-  // image: {
-  //   backgroundImage: 'url(https://source.unsplash.com/random)',
-  //   backgroundSize: 'cover',
-  // },
+
   paper: {
     margin: theme.spacing(8, 4),
-    
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#000",
   },
   form: {
-    width: '100%',
+    width: '30%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -97,7 +93,7 @@ export default function Signin() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+          CREATE ACCOUNT
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
@@ -121,14 +117,28 @@ export default function Signin() {
               type="password"
               onChange={e => setPassword(e.target.value)}
             />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="confirmPassword"
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              onChange={e => setPassword(e.target.value)}
+            />
             <Button
+              style={{
+                backgroundColor: "#000",
+                color: "#fff"
+            }}
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
               className={classes.submit}
             >
-              Sign In
+              CREATE ACCOUNT
             </Button>
           </form>
         </div>

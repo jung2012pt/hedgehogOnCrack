@@ -5,10 +5,12 @@ import {
   Routes, // instead of "Switch"
   Route,
 } from "react-router-dom";
-import Signin from './Sigin.js';
+import Signin from './view/Sigin.js';
 import Profile from './Profile.js';
 import Category from './view/Category.js';
 import NewCatalog from './view/newCatalog.js';
+import Bottle from './view/Bottle.js';
+import Login from './view/login.js';
 
 
 function App() {
@@ -39,8 +41,9 @@ function App() {
       <Routes>
         <Route path="/" element={<NewCatalog />} />
         <Route path="/1" element={<Category />} />
-        <Route path="/abc" element={<Signin />} />
-
+        <Route path="/2" element={<Bottle />} />
+        <Route path="/3" element={<Signin />} />
+        <Route path="/4" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

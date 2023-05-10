@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -8,8 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+// import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function loginUser(credentials) {
-  return fetch('https://www.mecallapi.com/api/login', {
+  return fetch('http://localhost:9000/api/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -54,22 +56,35 @@ export default function Login() {
   const classes = useStyles();
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
-
+  const navigate = useNavigate();
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log("FFFFFFFFFFFFF");
     const response = await loginUser({
       username,
       password
     });
-    if ('accessToken' in response) {
-      swal("Success", response.message, "success", {
+    console.log(response);
+    if (!response.message) {
+      // swal("Success", response.message, "success", {
+      //   buttons: false,
+      //   timer: 2000,
+      // })
+      swal({
+        title: "Are you sure ??",
+        text: response.message,
+        icon: "success",
         buttons: false,
         timer: 2000,
+        // dangerMode: true,
       })
+        // navigate('/2')
         .then((value) => {
-          localStorage.setItem('accessToken', response['accessToken']);
-          localStorage.setItem('user', JSON.stringify(response['user']));
-          window.location.href = "/profile";
+          console.log(response);
+          // localStorage.setItem('user', JSON.stringify(response['user']));
+          localStorage.setItem('id', response.id);
+
+          navigate('/2')
         });
     } else {
       swal("Failed", response.message, "error");
@@ -94,9 +109,9 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              name="email"
-              label="Email Address"
+              id="username"
+              name="username"
+              label="Username"
               onChange={e => setUserName(e.target.value)}
             />
             <TextField
@@ -110,20 +125,20 @@ export default function Login() {
               type="password"
               onChange={e => setPassword(e.target.value)}
             />
-            <Link to="/2">
-              <Button
-                style={{
-                  backgroundColor: "#000",
-                  color: "#fff"
-                }}
-                type="submit"
-                fullWidth
-                variant="contained"
-                className={classes.submit}
-              >
-                Login
-              </Button>
-            </Link>
+            {/* <Link to="/2"> */}
+            <Button
+              style={{
+                backgroundColor: "#000",
+                color: "#fff"
+              }}
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+            >
+              Login
+            </Button>
+            {/* </Link> */}
           </form>
           <Typography variant="body2" color="textSecondary" align="center">
             Don't have an account yet?

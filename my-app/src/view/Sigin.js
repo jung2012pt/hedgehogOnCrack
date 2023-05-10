@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
 
   root: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function loginUser(credentials) {
-  return fetch('https://www.mecallapi.com/api/login', {
+  return fetch('http://localhost:9000/api/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -54,28 +54,45 @@ export default function Signin() {
   const classes = useStyles();
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
-
+  const navigate = useNavigate();
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log("FFFFFFFFFFFFF");
     const response = await loginUser({
       username,
       password
     });
-    if ('accessToken' in response) {
+    if (response.status = 200) {
       swal("Success", response.message, "success", {
         buttons: false,
         timer: 2000,
       })
-        .then((value) => {
-          localStorage.setItem('accessToken', response['accessToken']);
-          localStorage.setItem('user', JSON.stringify(response['user']));
-          window.location.href = "/profile";
-        });
+      navigate('/4')
+      // .then((value) => {
+      //   localStorage.setItem('accessToken', response['accessToken']);
+      //   localStorage.setItem('user', JSON.stringify(response['user']));
+      //   window.location.href = "/profile";
+      // });
     } else {
       swal("Failed", response.message, "error");
     }
   }
-
+  // function send() {
+  //   var myVar = { username: 1 };
+  //   // console.log("tuleb siia", document.getElementById('saada').value);
+  //   fetch("http://localhost:9000/api/auth/signup", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "text/json"
+  //     },
+  //     body: JSON.stringify(myVar)
+  //   }).then(function (response) {
+  //     console.log(response);
+  //     return response.json();
+  //   }).then(function (muutuja) {
+  //     // document.getElementById('väljund').innerHTML = JSON.stringify(muutuja);
+  //   });
+  // }
   return (
     <Grid container className={classes.root}>
       <CssBaseline />
@@ -94,9 +111,9 @@ export default function Signin() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              name="email"
-              label="Email Address"
+              id="username"
+              name="username"
+              label="Username"
               onChange={e => setUserName(e.target.value)}
             />
             <TextField
@@ -121,7 +138,7 @@ export default function Signin() {
               type="password"
               onChange={e => setPassword(e.target.value)}
             />
-            <Link to="/4">
+            {/* <Link to="/4"> */}
             <Button
               style={{
                 backgroundColor: "#000",
@@ -134,7 +151,7 @@ export default function Signin() {
             >
               CREATE ACCOUNT
             </Button>
-            </Link>
+            {/* </Link> */}
           </form>
         </div>
       </Grid>

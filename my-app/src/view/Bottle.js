@@ -8,17 +8,51 @@ import bg2 from '../image/bg2.jpg'; // Tell webpack this JS file uses this image
 import bg3 from '../image/bg3.avif'; // Tell webpack this JS file uses this image
 import bg4 from '../image/bg4.webp'; // Tell webpack this JS file uses this image
 
+import { makeStyles } from '@material-ui/core/styles';
 
 import savanna_OK from '../image/savanna_OK.webp'; // Tell webpack this JS file uses this image
 import bottle_beach from '../image/bottle_beach.webp'; // Tell webpack this JS file uses this image
 import Coral_OK from '../image/Coral_OK.webp'; // Tell webpack this JS file uses this image
 import Glacier_OK from '../image/Glacier_OK.webp'; // Tell webpack this JS file uses this image
 
+import Button from '@material-ui/core/Button';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
+// import logo from '../image/104213a58.jpg'; // Tell webpack this JS file uses this image
+// import logo from '../image/104213a58.jpg'; // Tell webpack this JS file uses this image
+const useStyles = makeStyles((theme) => ({
 
-// import logo from '../image/104213a58.jpg'; // Tell webpack this JS file uses this image
-// import logo from '../image/104213a58.jpg'; // Tell webpack this JS file uses this image
+    root: {
+        "& .MuiPaper-root": {
+            background: '#FEF9EE',
+            height: '100vh'
+        }
+    },
+
+    paper: {
+        margin: theme.spacing(8, 4),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: "#000",
+    },
+    form: {
+        width: '30%',
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
 
 export default function Bottle() {
+
+    const navigate = useNavigate();
+    const classes = useStyles();
+
     const [bottle, setBottles] = useState([])
     const image = {
         bg: bg,
@@ -30,6 +64,7 @@ export default function Bottle() {
         Coral_OK: Coral_OK,
         Glacier_OK: Glacier_OK
     }
+    const userId = localStorage.getItem("id");
     useEffect(() => {
         fetchUserData();
     }, []);
@@ -57,6 +92,8 @@ export default function Bottle() {
     }
     const fetchUserData = async () => {
         // let response = await fetch('https://francexavimessi.github.io/demo/botton.json')
+        console.log(localStorage.getItem("id"));
+
         fetch("http://localhost:9000/products", {
             method: "GET",
             headers: {
@@ -76,42 +113,77 @@ export default function Bottle() {
 
             // document.getElementById('väljund').innerHTML = JSON.stringify(muutuja);
         });
-        // let response = await fetch('http://localhost:9000/products')
-        // console.log("response");
 
-        // console.log(response);
-        // console.log(response.body);
-
-        // response = response
-        // setBottles(response)
-        // swiperRender()
-        // fetch("https://francexavimessi.github.io/demo/botton.json")
-        // .then(response => {
-        //     return response.json()
-        // })
-        // .then(data => {
-        //     setBottles(data)
-        //     console.log(data.length);
-        //     console.log(bottle.length);
-
-        // })
     }
+    async function buying(credentials) {
+        const userId = localStorage.getItem("id");
 
-    function send() {
-        var myVar = { "id": 1 };
-        // console.log("tuleb siia", document.getElementById('saada').value);
-        fetch("http://localhost:9000/products", {
-            method: "GET",
+        return fetch('http://localhost:9000/api/user/' + userId + '/transaction', {
+            method: 'POST',
             headers: {
-                "Content-Type": "text/plain"
+                'Content-Type': 'application/json'
             },
-            // body: JSON.stringify(myVar)
-        }).then(function (response) {
-            console.log(response);
-            return response.json();
-        }).then(function (muutuja) {
-            document.getElementById('väljund').innerHTML = JSON.stringify(muutuja);
-        });
+            body: JSON.stringify(credentials)
+        })
+            .then(data => data.json())
+    }
+    const handleSubmit = async (e, id) => {
+        // e.preventDefault();
+        const userId = localStorage.getItem("id");
+        e.preventDefault();
+        console.log("FFFFFFFFFFFFF");
+        console.log(id);
+        console.log(userId);
+        console.log("FFFFFFFFFFFFF");
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+        })
+            .then(async (value) => {
+                if (value) {
+                    const response = await buying({
+                        userId: userId,
+                        productId: id
+                    });
+                    console.log(response);
+                    if (!response.message) {
+                        // swal("Success", response.message, "success", {
+                        //   buttons: false,
+                        //   timer: 2000,
+                        // })
+                        swal({
+                            title: "Are you sure ??",
+                            text: response.message,
+                            icon: "success",
+                            buttons: false,
+                            timer: 2000,
+                            // dangerMode: true,
+                        })
+                            // navigate('/2')
+                            .then((value) => {
+                                console.log(response);
+                                // localStorage.setItem('user', JSON.stringify(response['user']));
+                                // localStorage.setItem('id', response.id);
+
+                                // navigate('/2')
+                            });
+                    } else {
+                        swal("Failed", response.message, "error");
+                    }
+                }
+
+            });;
+
     }
     return (
         <div className="container">
@@ -153,7 +225,22 @@ export default function Bottle() {
                                         <h1 className="main-title">{b.title}</h1>
                                         <h2 className="main-subtitle">{b.price}</h2>
                                     </div>
+
                                     <div className="main-content">
+                                        <Button
+                                            style={{
+                                                backgroundColor: "#000",
+                                                color: "#fff",
+                                                // width: "500px"
+                                            }}
+                                            type="submit"
+                                            fullWidth
+                                            variant="contained"
+                                            className={classes.submit}
+                                            onClick={(e) => { handleSubmit(e, b._id) }}
+                                        >
+                                            BUY NOW
+                                        </Button>
                                         <div className="main-content__title">{b.subtitle1}
                                         </div>
                                         <div className="main-content__subtitle">{b.subtitle2}</div>
@@ -166,6 +253,10 @@ export default function Bottle() {
                                                 <line x1="15" y1="8" x2="19" y2="12" />
                                             </svg>
                                         </div> */}
+                                        {/* <form className={classes.form} noValidate onSubmit={handleSubmit(b._id)}> */}
+
+
+                                        {/* </form> */}
                                     </div>
                                 </div>
                                 <div className="center">
@@ -179,7 +270,7 @@ export default function Bottle() {
                         ))
 
                     )}
-                   
+
                 </div>
             </div>
             {/* <div className="button-wrapper">

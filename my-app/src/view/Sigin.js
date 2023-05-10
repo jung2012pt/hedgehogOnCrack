@@ -9,17 +9,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
-// import { ThemeProvider, createTheme } from "@mui/material/styles";
-// const themeLight = createTheme({
-//   palette: {
-//     background: {
-//       default: "#e4f0e2"
-//     }
-//   }
-// });
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  
+
   root: {
     "& .MuiPaper-root": {
       background: '#FEF9EE',
@@ -55,7 +48,7 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
- }
+}
 
 export default function Signin() {
   const classes = useStyles();
@@ -73,11 +66,11 @@ export default function Signin() {
         buttons: false,
         timer: 2000,
       })
-      .then((value) => {
-        localStorage.setItem('accessToken', response['accessToken']);
-        localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/profile";
-      });
+        .then((value) => {
+          localStorage.setItem('accessToken', response['accessToken']);
+          localStorage.setItem('user', JSON.stringify(response['user']));
+          window.location.href = "/profile";
+        });
     } else {
       swal("Failed", response.message, "error");
     }
@@ -87,13 +80,13 @@ export default function Signin() {
     <Grid container className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} className={classes.image} />
-      <Grid item xs={12}  component={Paper} elevation={6} square>
+      <Grid item xs={12} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          CREATE ACCOUNT
+            CREATE ACCOUNT
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
@@ -128,11 +121,12 @@ export default function Signin() {
               type="password"
               onChange={e => setPassword(e.target.value)}
             />
+            <Link to="/4">
             <Button
               style={{
                 backgroundColor: "#000",
                 color: "#fff"
-            }}
+              }}
               type="submit"
               fullWidth
               variant="contained"
@@ -140,6 +134,7 @@ export default function Signin() {
             >
               CREATE ACCOUNT
             </Button>
+            </Link>
           </form>
         </div>
       </Grid>

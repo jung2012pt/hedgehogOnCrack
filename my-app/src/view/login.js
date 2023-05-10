@@ -9,17 +9,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
-// import { ThemeProvider, createTheme } from "@mui/material/styles";
-// const themeLight = createTheme({
-//   palette: {
-//     background: {
-//       default: "#e4f0e2"
-//     }
-//   }
-// });
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  
+
   root: {
     "& .MuiPaper-root": {
       background: '#FEF9EE',
@@ -55,7 +48,7 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
- }
+}
 
 export default function Login() {
   const classes = useStyles();
@@ -73,11 +66,11 @@ export default function Login() {
         buttons: false,
         timer: 2000,
       })
-      .then((value) => {
-        localStorage.setItem('accessToken', response['accessToken']);
-        localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/profile";
-      });
+        .then((value) => {
+          localStorage.setItem('accessToken', response['accessToken']);
+          localStorage.setItem('user', JSON.stringify(response['user']));
+          window.location.href = "/profile";
+        });
     } else {
       swal("Failed", response.message, "error");
     }
@@ -87,13 +80,13 @@ export default function Login() {
     <Grid container className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} className={classes.image} />
-      <Grid item xs={12}  component={Paper} elevation={6} square>
+      <Grid item xs={12} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          Login
+            Login
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
@@ -117,19 +110,28 @@ export default function Login() {
               type="password"
               onChange={e => setPassword(e.target.value)}
             />
-            <Button
-              style={{
-                backgroundColor: "#000",
-                color: "#fff"
-            }}
-              type="submit"
-              fullWidth
-              variant="contained"
-              className={classes.submit}
-            >
-              Login
-            </Button>
+            <Link to="/2">
+              <Button
+                style={{
+                  backgroundColor: "#000",
+                  color: "#fff"
+                }}
+                type="submit"
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+              >
+                Login
+              </Button>
+            </Link>
           </form>
+          <Typography variant="body2" color="textSecondary" align="center">
+            Don't have an account yet?
+            <Link to="/3" variant="body2">
+              &nbsp;Create your account
+            </Link>
+          </Typography>
+
         </div>
       </Grid>
     </Grid>

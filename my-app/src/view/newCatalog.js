@@ -86,7 +86,7 @@ export default function newCatalog() {
     // const classes = useStyles();
 
     return (
-        <div>
+        <div >
 
             <div class="card-swiper">
                 <div class="card-groups">

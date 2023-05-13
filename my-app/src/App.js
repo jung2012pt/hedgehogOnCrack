@@ -40,8 +40,8 @@ function App() {
     // </BrowserRouter>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<NewCatalog />} />
-        <Route path="/1" element={<Category />} />
+        <Route path="/" element={<Login />} />
+        
         <Route path="/2" element={<Bottle />} />
         <Route path="/3" element={<Signin />} />
         <Route path="/4" element={<Login />} />

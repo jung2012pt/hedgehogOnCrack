@@ -71,7 +71,7 @@ export default function Login() {
       //   timer: 2000,
       // })
       swal({
-        title: "Are you sure ??",
+        title: "Welcome",
         text: response.message,
         icon: "success",
         buttons: false,

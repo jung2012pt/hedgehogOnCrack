@@ -54,6 +54,8 @@ export default function Bottle() {
     const classes = useStyles();
 
     const [bottle, setBottles] = useState([])
+    // const [index, setIndex] = useState([])
+    let index = 0;;
     const image = {
         bg: bg,
         bg2: bg2,
@@ -87,9 +89,66 @@ export default function Bottle() {
         swiper.on('slideChange', function (sld) {
             console.log("FFFFFFFFFFFFFFFFF");
             console.log(sld.realIndex);
+            // setIndex(sld.realIndex)
+            // console.log(index);
             document.body.setAttribute('data-sld', sld.realIndex);
         });
+
     }
+    const prevBotton = async () => {
+
+        const mySwiper = document.querySelector('.mySwiper');
+
+        const swiper = new Swiper(mySwiper, {
+            navigation: {
+                nextEl: ".swiper-next-button",
+                prevEl: ".swiper-prev-button"
+            },
+            effect: 'fade',
+            loop: 'infinite',
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'fraction'
+            }
+        });
+        swiper.slidePrev();
+        index--;
+        if (index < 0) {
+            index = 3;
+        }
+        document.body.setAttribute('data-sld', index);
+
+    }
+    const nextBotton = async () => {
+
+        const mySwiper = document.querySelector('.mySwiper');
+
+        const swiper = new Swiper(mySwiper, {
+            navigation: {
+                nextEl: ".swiper-next-button",
+                prevEl: ".swiper-prev-button"
+            },
+            effect: 'fade',
+            loop: 'infinite',
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'fraction'
+            }
+        });
+        // swiper.slidePrev();
+        index++;
+        if (index > 3) {
+            index = 0;
+        }
+        swiper.slideTo(index)
+        console.log(index);
+        document.body.setAttribute('data-sld', index);
+
+
+
+    }
+
+
     const fetchUserData = async () => {
         // let response = await fetch('https://francexavimessi.github.io/demo/botton.json')
         console.log(localStorage.getItem("id"));
@@ -200,8 +259,9 @@ export default function Bottle() {
                     <a href="#">Bottle</a>
                     <a href="#">Accessories</a>
                 </div> */}
-                {/* <div className="header-icons">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+                <div className="header-icons">
+                    {/* <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -209,8 +269,37 @@ export default function Bottle() {
                     </svg>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208.955 208.955">
                         <path d="M190.85 200.227L178.135 58.626a7.5 7.5 0 00-7.47-6.829h-26.221V39.971c0-22.04-17.93-39.971-39.969-39.971-22.038 0-39.966 17.931-39.966 39.971v11.826H38.27a7.5 7.5 0 00-7.47 6.829L18.035 200.784a7.5 7.5 0 007.47 8.17h157.946a7.5 7.5 0 007.399-8.727zM79.509 39.971c0-13.769 11.2-24.971 24.967-24.971 13.768 0 24.969 11.202 24.969 24.971v11.826H79.509V39.971zm-45.8 153.984L45.127 66.797h19.382v13.412a7.5 7.5 0 007.5 7.5 7.5 7.5 0 007.5-7.5V66.797h49.936v13.412a7.5 7.5 0 007.5 7.5 7.5 7.5 0 007.5-7.5V66.797h19.364l11.418 127.158H33.709z" />
-                    </svg>
-                </div> */}
+                    </svg> */}
+                    <Button
+                        style={{
+                            backgroundColor: "#000",
+                            color: "#fff",
+                            marginRight: 20
+                            // width: "500px"
+                        }}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        className={classes.submit}
+                        onClick={(e) => { navigate('/5') }}
+                    >
+
+                        ประวัติการสั่งซื้อ
+                    </Button>
+                    <Button
+                        style={{
+                            backgroundColor: "#000",
+                            color: "#fff",
+                            // width: "500px"
+                        }}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        className={classes.submit}
+                        onClick={(e) => { navigate('/') }}
+                    >
+                        ออกจากระบบ</Button>
+                </div>
             </div>
             <div className="mySwiper">
                 <div className="main-wrapper swiper-wrapper">
@@ -223,7 +312,7 @@ export default function Bottle() {
                                     <div className="main-wrapper">
                                         <h3 className="main-header">{b.name}</h3>
                                         <h1 className="main-title">{b.title}</h1>
-                                        <h2 className="main-subtitle">{b.price}</h2>
+                                        <h2 className="main-subtitle">{b.price} บาท</h2>
                                     </div>
 
                                     <div className="main-content">
@@ -273,31 +362,18 @@ export default function Bottle() {
 
                 </div>
             </div>
-            {/* <div className="button-wrapper">
-                <div className="swiper-button swiper-prev-button">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                </div>
-                <div className="swiper-button swiper-next-button">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                </div>
-            </div> */}
-            {/* <div class="button-wrapper">
-                <div class="swiper-button swiper-prev-button">
+            <div class="button-wrapper">
+                <div class="swiper-button swiper-prev-button" onClick={(e) => { prevBotton() }}>
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
                 </div>
-                <div class="swiper-button swiper-next-button">
+                <div class="swiper-button swiper-next-button" onClick={(e) => { nextBotton() }}>
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
                 </div>
-            </div> */}
-            {/* <div className="swiper-pagination"></div> */}
+            </div>
         </div>
     );
 }

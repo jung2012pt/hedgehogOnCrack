@@ -1,0 +1,71 @@
+body {
+    background-color: #e6decf;
+}
+
+.card {
+    background-color: #e4e3e0;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px #cccccc;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+.cardHeader {
+    display: flex;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.ID {
+    color: orangered;
+}
+
+.status {
+    margin-left: auto;
+    color: green;
+}
+
+.cardBody {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.info {
+    display: grid;
+    width: 25%;
+    margin: auto;
+    font-size: 20px;
+}
+
+.info1 {
+    width: 25%;
+    margin-top: 20px;
+}
+
+.price {
+    margin-left: 70%;
+    font-size: 30px;
+}
+
+.Date {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pic {
+    margin-left: 40px;
+    width: 150px;
+}

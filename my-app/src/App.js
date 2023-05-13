@@ -11,6 +11,7 @@ import Category from './view/Category.js';
 import NewCatalog from './view/newCatalog.js';
 import Bottle from './view/Bottle.js';
 import Login from './view/login.js';
+import OrdersHistory from './view/ordersHistory.js';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/2" element={<Bottle />} />
         <Route path="/3" element={<Signin />} />
         <Route path="/4" element={<Login />} />
+        <Route path="/5" element={<OrdersHistory />} />
       </Routes>
     </BrowserRouter>
   );
